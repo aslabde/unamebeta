@@ -1,0 +1,13 @@
+<application>
+	<display-name>unamebeta</display-name>
+	<module>
+		<web>
+			<web-uri>unamebeta.war</web-uri>
+			<context-root>/unamebeta</context-root>
+		</web>
+	</module>
+	<module>
+		<ejb>unamebeta.jar</ejb>
+	</module>
+</application>
+
