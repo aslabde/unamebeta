@@ -18,13 +18,13 @@ public class ParameterJPA implements Serializable{
 	
 	public ParameterJPA(String key, String par_value) {
 		super();
-		this.key = key;
 		this.par_value = par_value;
 	}
 	
 	public ParameterJPA(){
 		super();
 	}
+	
 	@Id
 	public String getKey() {
 		return key;

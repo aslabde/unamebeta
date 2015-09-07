@@ -3,10 +3,11 @@ package tk.uname.persistence.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
 
 @Entity
 @XmlRootElement
@@ -30,7 +31,6 @@ public class PlayerJPA implements Serializable{
 			int field_position, int market_value, int points,
 			int updated_market_value, int updated_points) {
 		super();
-		this.id = id;
 		this.pl_name = pl_name;
 		this.real_team = real_team;
 		this.user_team = user_team;
@@ -42,6 +42,8 @@ public class PlayerJPA implements Serializable{
 	}
 
 	@Id
+	@GeneratedValue
+	@OneToOne(optional=false, mappedBy="player")
 	public long getId() {
 		return id;
 	}
