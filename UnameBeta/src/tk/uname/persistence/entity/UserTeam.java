@@ -6,7 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -20,11 +22,12 @@ public class UserTeam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	private long id;
-	@OneToOne(optional=false)
+	@ManyToOne(optional=false) 
+	@JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
 	private UserJPA user;
 	@OneToOne     @JoinColumn(name="player_id")
 	private PlayerJPA player;
-	@Column(name="field_position")
+	@Column(name="eleven_position")
 	private int fieldPosition;
 	
 	public UserTeam(){}
@@ -35,8 +38,6 @@ public class UserTeam implements Serializable{
 		this.player = player;
 		this.fieldPosition = fieldPosition;
 	}
-
-	
 
 	public UserJPA getUser() {
 		return user;
