@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,6 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PlayerJPA implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue
 	private long id;
 	private String pl_name;
 	private int real_team;
@@ -27,7 +30,7 @@ public class PlayerJPA implements Serializable{
 	
 	public PlayerJPA(){}
 
-	public PlayerJPA(long id, String pl_name, int real_team, int user_team,
+	public PlayerJPA(String pl_name, int real_team, int user_team,
 			int field_position, int market_value, int points,
 			int updated_market_value, int updated_points) {
 		super();
@@ -41,9 +44,7 @@ public class PlayerJPA implements Serializable{
 		this.updated_points = updated_points;
 	}
 
-	@Id
-	@GeneratedValue
-	@OneToOne(optional=false, mappedBy="player")
+	
 	public long getId() {
 		return id;
 	}

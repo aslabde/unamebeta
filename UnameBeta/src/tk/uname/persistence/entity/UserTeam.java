@@ -4,24 +4,25 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-@Table(name = "futboluname.user_teamr")
+@Table(name = "futboluname.user_team")
 public class UserTeam implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	@Id
 	private long id;
 	@OneToOne(optional=false)
 	private UserJPA user;
-	@OneToOne(optional=false)
+	@OneToOne     @JoinColumn(name="player_id")
 	private PlayerJPA player;
 	@Column(name="field_position")
 	private int fieldPosition;
@@ -35,15 +36,7 @@ public class UserTeam implements Serializable{
 		this.fieldPosition = fieldPosition;
 	}
 
-	@Id
-	@GeneratedValue
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	
 
 	public UserJPA getUser() {
 		return user;
@@ -71,6 +64,14 @@ public class UserTeam implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	};
 	
 	
