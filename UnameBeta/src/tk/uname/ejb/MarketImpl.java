@@ -11,8 +11,10 @@ import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 import tk.uname.persistence.entity.PlayerJPA;
+import tk.uname.persistence.entity.UserTeam;
 import tk.uname.to.MarketPlayerTO;
 
 @Path("/market")
@@ -27,6 +29,7 @@ public class MarketImpl {
 	
 	@GET
 	@Path("/getallplayers")
+	@Produces("application/json")
 	public List<MarketPlayerTO> getMarketPlayersList(){
 				
 		StringBuffer sql = new StringBuffer("")
@@ -55,19 +58,20 @@ public class MarketImpl {
 	
 	@GET
 	@Path("/getteamuserplayers/{userId}")
-	public List<PlayerJPA> getUserTeamPlayers(@PathParam("userId") int userId){
+	@Produces("application/json")
+	public List<UserTeam> getUserTeamPlayers(@PathParam("userId") int userId){
 		StringBuffer sql = new StringBuffer("")
 			.append(" SELECT * FROM ")
-			.append(" USER_TEAM ")
+			.append(" futboluname.USER_TEAM ")
 			.append(" WHERE ")
-			.append(" USER = userId ")
+			.append(" USER_ID = userId ")
 			;
 		
 		String sqlS = sql.toString();
-		sqlS.replace("userId", userId+"");
+		sqlS=sqlS.replace("userId", userId+"");
 		
-		Query query = entman.createNativeQuery(sql.toString(),PlayerJPA.class);
-		List<PlayerJPA> teamPlayers =  query.getResultList();
+		Query query = entman.createNativeQuery(sqlS,UserTeam.class);
+		List<UserTeam> teamPlayers =  query.getResultList();
 		
 		return teamPlayers;
 	}
